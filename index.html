@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Website</title>
+    <title>Clever Embed</title>
     <style>
         body {
             margin: 0;
@@ -17,26 +17,6 @@
             height: 100%;
             border: none;
         }
-        #hacker-menu, #buttons-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        #buttons-menu button {
-            margin: 5px;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -44,94 +24,12 @@
 <!-- Fullscreen Embed -->
 <iframe id="main-frame" src="https://clever.com"></iframe>
 
-<!-- Hacker Menu -->
-<div id="hacker-menu">
-    <h2>Enter Password:</h2>
-    <input type="password" id="password-input" placeholder="Password" />
-    <button id="submit-password">Submit</button>
-</div>
-
-<!-- Buttons Menu -->
-<div id="buttons-menu">
-    <h2>Select a Website</h2>
-    <div id="button-container"></div>
-</div>
-
 <script>
-    // Configurations
-    const PASSWORD = "fanum99";
-    const websites = [
-        "https://example1.com",
-        "https://example2.com",
-        "https://example3.com",
-        "https://example4.com",
-        "https://example5.com",
-        "https://example6.com",
-        "https://example7.com",
-        "https://example8.com",
-        "https://example9.com",
-        "https://example10.com",
-        "https://example11.com",
-        "https://example12.com",
-        "https://example13.com",
-        "https://example14.com",
-        "https://example15.com",
-        "https://example16.com",
-        "https://example17.com",
-        "https://example18.com",
-        "https://example19.com",
-        "https://example20.com"
-    ];
-
-    // DOM Elements
-    const iframe = document.getElementById('main-frame');
-    const hackerMenu = document.getElementById('hacker-menu');
-    const buttonsMenu = document.getElementById('buttons-menu');
-    const passwordInput = document.getElementById('password-input');
-    const buttonContainer = document.getElementById('button-container');
-    const submitPassword = document.getElementById('submit-password');
-
-    // Display Hacker Menu
     document.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.key === 'q') {
             e.preventDefault();
-            hackerMenu.style.display = 'flex';
-            passwordInput.focus();
-        }
-    });
-
-    // Handle Password Submission
-    submitPassword.addEventListener('click', () => {
-        if (passwordInput.value === PASSWORD) {
-            hackerMenu.style.display = 'none';
-            displayButtonsMenu();
-        } else {
-            alert("Incorrect password!");
-            passwordInput.value = '';
-        }
-    });
-
-    // Display Buttons Menu
-    function displayButtonsMenu() {
-        buttonsMenu.style.display = 'flex';
-        buttonContainer.innerHTML = ''; // Clear previous buttons
-        websites.forEach((site, index) => {
-            const button = document.createElement('button');
-            button.textContent = `Website ${index + 1}`;
-            button.addEventListener('click', () => {
-                iframe.src = site;
-                buttonsMenu.style.display = 'none';
-            });
-            buttonContainer.appendChild(button);
-        });
-    }
-
-    // Go Back to Buttons Menu
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.altKey && e.key === 'q') {
-            e.preventDefault();
-            buttonsMenu.style.display = 'flex';
-            iframe.src = ''; // Clear iframe to stop current embed
+            // Redirect to the second website
+            window.location.href = "https://example.com/second-page"; // Replace with the full URL of the second website
         }
     });
 </script>
