@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Protected</title>
+    <title>Clever Embed with Secret Menu</title>
     <style>
-        body {
+        body, html {
             margin: 0;
-            overflow: hidden;
+            padding: 0;
+            height: 100%;
             font-family: Arial, sans-serif;
         }
         iframe {
@@ -18,79 +19,128 @@
             height: 100%;
             border: none;
         }
-        #hacker-menu {
-            display: none; /* Hidden by default */
+        #password-screen {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
+            background-color: #121212;
+            color: #e0e0e0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            z-index: 100;
+            align-items: center;
+            z-index: 1000;
         }
-        #hacker-menu input {
-            margin: 10px 0;
-            padding: 10px;
-            font-size: 18px;
+        #password-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
-        button {
+        #password-input {
+            padding: 10px;
+            width: 100%;
+            background-color: #333;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        #submit-password {
             padding: 10px 20px;
-            font-size: 16px;
+            border: none;
+            background-color: #3a4a66;
+            color: white;
             cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+        }
+        #submit-password:hover {
+            background-color: #2e3d57;
+        }
+        #button-container {
+            display: none;
+            margin-top: 20px;
+        }
+        .button {
+            display: block;
+            padding: 10px 20px;
+            margin: 10px auto;
+            border: none;
+            background-color: #3a4a66;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+        }
+        .button:hover {
+            background-color: #2e3d57;
         }
     </style>
 </head>
 <body>
 
 <!-- Fullscreen Embed -->
-<iframe id="main-frame" src="https://example.com"></iframe> <!-- Replace with a default website or leave blank -->
+<iframe id="main-frame" src="https://clever.com"></iframe>
 
-<!-- Hacker Menu -->
-<div id="hacker-menu">
-    <h2>Enter Password:</h2>
-    <input type="password" id="password-input" placeholder="Password" />
-    <button id="submit-password">Submit</button>
+<!-- Hidden Password Screen -->
+<div id="password-screen">
+    <div id="password-container">
+        <h2>michael N is the owner of this website.. if you are from GLMS, GET OUTTT SKIBIDI</h2>
+        <input type="password" id="password-input" placeholder="Enter your password..." />
+        <button id="submit-password">Submit</button>
+        <div id="button-container">
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document/'">ai chat</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document3/'">ai humanizer</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document2/'">minecraft (actually fun)</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document4/'">subway surfers (actually fun)</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document5/'">slope</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document6/'">geometry dash</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document7/'">project laser</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document8/'">run 3</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document9/'">vex 5 (actually fun)</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document11/'">super mario 64</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document12/'">flappy bird</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document13/'">tiny fishing (actually fun)</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document14/'">slow roads</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document15/'">paper.io (actually fun)</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document16/'">doge miner (actually fun)</button>
+            <button class="button" onclick="window.location.href='https://vexinity99.github.io/document17/'">granny (horror)</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    // Configuration
-    const PASSWORD = "fanum99";
-
-    // DOM Elements
-    const iframe = document.getElementById('main-frame');
-    const hackerMenu = document.getElementById('hacker-menu');
+    const correctPassword = "skib99";
+    const passwordScreen = document.getElementById('password-screen');
     const passwordInput = document.getElementById('password-input');
-    const submitPassword = document.getElementById('submit-password');
+    const submitPasswordButton = document.getElementById('submit-password');
+    const buttonContainer = document.getElementById('button-container');
+    const iframe = document.getElementById('main-frame');
 
-    // Show Hacker Menu on Load
-    window.addEventListener('load', () => {
-        hackerMenu.style.display = 'flex';
-    });
-
-    // Handle Password Submission
-    submitPassword.addEventListener('click', () => {
-        if (passwordInput.value === PASSWORD) {
-            const newSite = prompt("Enter the URL of the site to embed:");
-            if (newSite) {
-                iframe.src = newSite;
-            }
-            hackerMenu.style.display = 'none'; // Close the menu
-        } else {
-            alert("Incorrect password!");
-            passwordInput.value = ''; // Clear the input field
+    // Show password screen when CTRL + Q is pressed
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'q') {
+            e.preventDefault();
+            passwordScreen.style.display = 'flex';
         }
     });
 
-    // Hide Menu on Escape Key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            hackerMenu.style.display = 'none';
+    // Handle password submission
+    submitPasswordButton.addEventListener('click', () => {
+        if (passwordInput.value === correctPassword) {
+            passwordInput.value = '';
+            buttonContainer.style.display = 'block';
+        } else {
+            alert("Sirron Leahcim: oh my god bro, if ur from GLMS get off my site bruh, this took me forever. not giving free games!!!");
         }
     });
 </script>
