@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clever Embed</title>
+    <title>Password Protected</title>
     <style>
         body {
             margin: 0;
             overflow: hidden;
+            font-family: Arial, sans-serif;
         }
         iframe {
             position: absolute;
@@ -17,19 +18,79 @@
             height: 100%;
             border: none;
         }
+        #hacker-menu {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        #hacker-menu input {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
 <!-- Fullscreen Embed -->
-<iframe id="main-frame" src="https://clever.com"></iframe>
+<iframe id="main-frame" src="https://example.com"></iframe> <!-- Replace with a default website or leave blank -->
+
+<!-- Hacker Menu -->
+<div id="hacker-menu">
+    <h2>Enter Password:</h2>
+    <input type="password" id="password-input" placeholder="Password" />
+    <button id="submit-password">Submit</button>
+</div>
 
 <script>
+    // Configuration
+    const PASSWORD = "fanum99";
+
+    // DOM Elements
+    const iframe = document.getElementById('main-frame');
+    const hackerMenu = document.getElementById('hacker-menu');
+    const passwordInput = document.getElementById('password-input');
+    const submitPassword = document.getElementById('submit-password');
+
+    // Show Hacker Menu on Load
+    window.addEventListener('load', () => {
+        hackerMenu.style.display = 'flex';
+    });
+
+    // Handle Password Submission
+    submitPassword.addEventListener('click', () => {
+        if (passwordInput.value === PASSWORD) {
+            const newSite = prompt("Enter the URL of the site to embed:");
+            if (newSite) {
+                iframe.src = newSite;
+            }
+            hackerMenu.style.display = 'none'; // Close the menu
+        } else {
+            alert("Incorrect password!");
+            passwordInput.value = ''; // Clear the input field
+        }
+    });
+
+    // Hide Menu on Escape Key
     document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.key === 'q') {
-            e.preventDefault();
-            // Redirect to the second website
-            window.location.href = "https://example.com/second-page"; // Replace with the full URL of the second website
+        if (e.key === 'Escape') {
+            hackerMenu.style.display = 'none';
         }
     });
 </script>
