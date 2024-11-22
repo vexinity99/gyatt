@@ -67,6 +67,7 @@
     <div id="popup-container">
         <button id="close-button">Close</button>
         <div id="popup-content">
+            <!-- Your provided HTML snippet -->
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -85,98 +86,29 @@
                         color: #e0e0e0;
                         text-align: center;
                     }
-                    #password-container {
-                        width: 100%;
-                        max-width: 400px;
-                        padding: 20px;
-                        background-color: #1e1e1e;
-                        border: 1px solid #333;
-                        border-radius: 8px;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                    }
-                    #password-input {
-                        padding: 10px;
-                        width: 100%;
-                        background-color: #333;
-                        color: #e0e0e0;
-                        border: 1px solid #555;
-                        border-radius: 4px;
-                        margin-bottom: 10px;
-                        text-align: center;
-                        box-sizing: border-box;
-                    }
-                    #submit-password {
-                        padding: 10px 20px;
-                        border: none;
-                        background-color: #f28dcf;
-                        color: white;
-                        cursor: pointer;
-                        border-radius: 4px;
-                        width: 100%;
-                    }
-                    #submit-password:hover {
-                        background-color: #f03eb2;
-                    }
-                    #button-container {
-                        display: none;
-                        margin-top: 20px;
-                    }
-                    .button {
-                        display: block;
-                        padding: 10px 20px;
-                        margin: 10px auto;
-                        border: none;
-                        background-color: #f28dcf;
-                        color: white;
-                        cursor: pointer;
-                        border-radius: 4px;
-                        width: 100%;
-                    }
-                    .button:hover {
-                        background-color: #f03eb2;
-                    }
+                    /* Your existing styles here */
                 </style>
             </head>
             <body>
-                <div id="password-container">
-                    <h2>if ur name is isias (idk how 2 spell) dont talk to me anymore at lunch</h2>
-                    <input type="password" id="password-input" placeholder="Enter your password..." />
-                    <button id="submit-password">Submit</button>
-                    <div id="button-container">
-                        <button class="button" onclick="window.location.href='https://vexinity99.github.io/document/'">ai chat</button>
-                        <button class="button" onclick="window.location.href='https://vexinity99.github.io/document3/'">ai humanizer</button>
-                        <!-- Add other buttons here -->
-                    </div>
-                </div>
-                <script>
-                    const correctPassword = "fanum99";
-                    const passwordInput = document.getElementById('password-input');
-                    const submitPasswordButton = document.getElementById('submit-password');
-                    const buttonContainer = document.getElementById('button-container');
-                    
-                    submitPasswordButton.addEventListener('click', () => {
-                        if (passwordInput.value === correctPassword) {
-                            passwordInput.value = '';
-                            buttonContainer.style.display = 'block';
-                        } else {
-                            alert("Sirron Leahcim: oh my god bro, if ur from GLMS get off my site bruh, this took me forever. not giving free games!!!");
-                        }
-                    });
-                </script>
+                <h2>Your content goes here!</h2>
             </body>
             </html>
         </div>
     </div>
 
     <script>
+        // Select any key for triggering the popup
+        const triggerKey = 'p'; // You can change this key to whatever you like
+
         document.addEventListener('keydown', (event) => {
-            if (event.ctrlKey && event.key !== 'Control') {
-                event.preventDefault();
+            if (event.key.toLowerCase() === triggerKey) {
+                // Open the popup
                 document.getElementById('popup-container').style.display = 'block';
             }
         });
 
         document.getElementById('close-button').addEventListener('click', () => {
+            // Close the popup
             document.getElementById('popup-container').style.display = 'none';
         });
     </script>
