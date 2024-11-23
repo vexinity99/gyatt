@@ -3,114 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fullscreen Clever Embed</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            border: none;
-        }
-
-        #popup-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            overflow: auto;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        #popup-content {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
-            margin: 50px auto;
-            overflow: auto;
-            height: 90%;
-        }
-
-        #close-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: #f28dcf;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #close-button:hover {
-            background-color: #f03eb2;
-        }
-    </style>
+    <title>Intelligence API</title>
 </head>
 <body>
-    <iframe src="https://clever.com/login"></iframe>
-
-    <div id="popup-container">
-        <button id="close-button">Close</button>
-        <div id="popup-content">
-            <!-- Your provided HTML snippet -->
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>css help bruh</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                        margin: 0;
-                        background-color: #121212;
-                        color: #e0e0e0;
-                        text-align: center;
-                    }
-                    /* Your existing styles here */
-                </style>
-            </head>
-            <body>
-                <h2>Your content goes here!</h2>
-            </body>
-            </html>
-        </div>
-    </div>
-
+    <pre id="response">Loading...</pre>
     <script>
-        // Select any key for triggering the popup
-        const triggerKey = 'p'; // You can change this key to whatever you like
+        const apiKey = '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';
+        const apiUrl = 'https://api.groq.ai/v1/chat/completions';
 
-        document.addEventListener('keydown', (event) => {
-            if (event.key.toLowerCase() === triggerKey) {
-                // Open the popup
-                document.getElementById('popup-container').style.display = 'block';
-            }
-        });
+        // Parse the URL for the query string parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const intelligencePrompt = urlParams.get('skib');
 
-        document.getElementById('close-button').addEventListener('click', () => {
-            // Close the popup
-            document.getElementById('popup-container').style.display = 'none';
-        });
+        if (!intelligencePrompt) {
+            // Show error if no prompt is provided
+            document.getElementById('response').textContent = JSON.stringify({ error: 'No intelligence prompt provided' }, null, 2);
+        } else {
+            // Create the messages for the Groq API
+            const messages = [
+                { role: 'system', content: 'You are a cool person.' },
+                { role: 'user', content: intelligencePrompt }
+            ];
+
+            // Call the Groq API
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'mixtral-8x7b-32768',
+                    messages: messages,
+                    max_tokens: 1000,
+                    temperature: 1.0,
+                    n: 1
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Display the JSON response
+                    document.getElementById('response').textContent = JSON.stringify({
+                        prompt: intelligencePrompt,
+                        response: data.choices[0].message.content
+                    }, null, 2);
+                })
+                .catch(error => {
+                    // Handle errors
+                    document.getElementById('response').textContent = JSON.stringify({ error: error.message }, null, 2);
+                });
+        }
     </script>
 </body>
 </html>
