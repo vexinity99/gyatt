@@ -3,56 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gyatt Intelligence API</title>
+    <title>Minecraft Version Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+            text-align: center;
+        }
+        #version-selector {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #3a4a66;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            margin: 5px 0;
+        }
+        button:hover {
+            background-color: #2e3d57;
+        }
+        #embed-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+        object {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-    <pre id="response">Loading...</pre>
-    <script>
-        const apiKey = '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';
-        const apiUrl = 'https://api.groq.ai/v1/chat/completions';
 
-        // Parse the URL for the query string parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        const intelligencePrompt = urlParams.get('skib');
+<div id="version-selector">
+    <h2>Minecraft Version Selector</h2>
+    <button id="version-1.9.2">1.9.2</button>
+    <button id="version-1.5.2">1.5.2</button>
+</div>
 
-        if (!intelligencePrompt) {
-            // Show error if no prompt is provided
-            document.getElementById('response').textContent = JSON.stringify({ error: 'No intelligence prompt provided' }, null, 2);
-        } else {
-            // Create the messages for the Groq API
-            const messages = [
-                { role: 'system', content: 'You are a cool person.' },
-                { role: 'user', content: intelligencePrompt }
-            ];
+<div id="embed-screen">
+    <object id="embed-object" data="" type="text/html">
+        <p>Your browser does not support this embedding. Please visit <a href="https://skibiditoilet.com" target="_blank">this link</a> instead.</p>
+    </object>
+</div>
 
-            // Call the Groq API
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                    model: 'mixtral-8x7b-32768',
-                    messages: messages,
-                    max_tokens: 1000,
-                    temperature: 1.0,
-                    n: 1
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    // Display the JSON response
-                    document.getElementById('response').textContent = JSON.stringify({
-                        prompt: intelligencePrompt,
-                        response: data.choices[0].message.content
-                    }, null, 2);
-                })
-                .catch(error => {
-                    // Handle errors
-                    document.getElementById('response').textContent = JSON.stringify({ error: error.message }, null, 2);
-                });
-        }
-    </script>
+<script>
+    const version1_9_2Button = document.getElementById('version-1.9.2');
+    const version1_5_2Button = document.getElementById('version-1.5.2');
+    const versionSelector = document.getElementById('version-selector');
+    const embedScreen = document.getElementById('embed-screen');
+    const embedObject = document.getElementById('embed-object');
+
+    const websiteURL1 = "YOUR_WEBSITE_URL_FOR_1_9_2"; // Replace with the URL for version 1.9.2
+    const websiteURL2 = "YOUR_WEBSITE_URL_FOR_1_5_2"; // Replace with the URL for version 1.5.2
+
+    version1_9_2Button.addEventListener('click', () => {
+        versionSelector.style.display = 'none';
+        embedScreen.style.display = 'block';
+        embedObject.data = websiteURL1;
+    });
+
+    version1_5_2Button.addEventListener('click', () => {
+        versionSelector.style.display = 'none';
+        embedScreen.style.display = 'block';
+        embedObject.data = websiteURL2;
+    });
+</script>
+
 </body>
 </html>
