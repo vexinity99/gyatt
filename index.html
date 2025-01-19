@@ -54,7 +54,8 @@
 
 <div id="version-selector">
     <h2>Minecraft Version Selector</h2>
-    <button id="version-1.9.2">1.9.2</button>
+    <button id="version-1.12.2">1.12.2 (NOT MULTIPLAYER)</button>
+    <button id="version-1.8.8">1.8.8</button>
     <button id="version-1.5.2">1.5.2</button>
 </div>
 
@@ -66,16 +67,24 @@
 
 
 <script>
-    const version1_9_2Button = document.getElementById('version-1.9.2');
+    const version1_12_2Button = document.getElementById('version-1.12.2');
+    const version1_8_8Button = document.getElementById('version-1.8.8');
     const version1_5_2Button = document.getElementById('version-1.5.2');
     const versionSelector = document.getElementById('version-selector');
     const embedScreen = document.getElementById('embed-screen');
     const embedObject = document.getElementById('embed-object');
 
-    const websiteURL1 = "https://vexinity99.github.io/1.9/v0.6.1/";
+    const websiteURL1 = "https://vexinity99.github.io/8fixed/";
     const websiteURL2 = "https://vexinity99.github.io/mathfun99/";
+    const websiteURL3 = "https://vexinity99.github.io/12test/";
 
-    version1_9_2Button.addEventListener('click', () => {
+version1_12_2Button.addEventListener('click', () => {
+        versionSelector.style.display = 'none';
+        embedScreen.style.display = 'block';
+        embedObject.data = websiteURL3;
+    });
+    
+    version1_8_8Button.addEventListener('click', () => {
         versionSelector.style.display = 'none';
         embedScreen.style.display = 'block';
         embedObject.data = websiteURL1;
